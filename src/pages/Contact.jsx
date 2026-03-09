@@ -1,8 +1,59 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    type: '',
+    name: '',
+    company: '',
+    email: '',
+    tel: '',
+    content: ''
+  });
+  const [status, setStatus] = useState('idle'); // idle | loading | success | error
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('loading');
+
+    try {
+      const response = await fetch('/api/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setStatus('success');
+      } else {
+        setStatus('error');
+      }
+    } catch (error) {
+      console.error('Submission error:', error);
+      setStatus('error');
+    }
+  };
+
+  if (status === 'success') {
+    return (
+      <div className="container section-padding-sm" style={pageStyle}>
+        <div style={formWrapperStyle} className="mobile-text-center">
+          <h2 style={{ color: 'var(--accent)', marginBottom: '20px' }}>お問い合わせありがとうございます</h2>
+          <p>内容を確認の上、担当者より折り返しご連絡させていただきます。</p>
+          <button onClick={() => setStatus('idle')} className="btn btn-primary" style={{ marginTop: '30px' }}>
+            フォームに戻る
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="container section-padding-sm" style={pageStyle}>
       <div style={headerStyle}>
@@ -11,41 +62,91 @@ const Contact = () => {
       </div>
 
       <div style={formWrapperStyle} className="section-padding-sm">
-        <form>
+        <form onSubmit={handleSubmit}>
           <div style={formGroupStyle}>
             <label style={labelStyle}>お問い合わせ種別<span style={reqStyle}>*</span></label>
-            <select style={inputStyle} required>
+            <select
+              name="type"
+              style={inputStyle}
+              value={formData.type}
+              onChange={handleChange}
+              required
+            >
               <option value="">選択してください</option>
-              <option>教育旅行の実施について</option>
-              <option>体験プログラムの詳細について</option>
-              <option>農村ホームステイ（民泊）について</option>
-              <option>取材・メディア掲載について</option>
-              <option>その他</option>
+              <option value="教育旅行の実施について">教育旅行の実施について</option>
+              <option value="体験プログラムの詳細について">体験プログラムの詳細について</option>
+              <option value="農村ホームステイ（民泊）について">農村ホームステイ（民泊）について</option>
+              <option value="取材・メディア掲載について">取材・メディア掲載について</option>
+              <option value="その他">その他</option>
             </select>
           </div>
           <div style={formGroupStyle}>
             <label style={labelStyle}>お名前（担当者名）<span style={reqStyle}>*</span></label>
-            <input type="text" style={inputStyle} required />
+            <input
+              name="name"
+              type="text"
+              style={inputStyle}
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
           </div>
           <div style={formGroupStyle}>
             <label style={labelStyle}>貴社名・団体名</label>
-            <input type="text" style={inputStyle} />
+            <input
+              name="company"
+              type="text"
+              style={inputStyle}
+              value={formData.company}
+              onChange={handleChange}
+            />
           </div>
           <div style={formGroupStyle}>
             <label style={labelStyle}>メールアドレス<span style={reqStyle}>*</span></label>
-            <input type="email" style={inputStyle} required />
+            <input
+              name="email"
+              type="email"
+              style={inputStyle}
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
           </div>
           <div style={formGroupStyle}>
             <label style={labelStyle}>お電話番号</label>
-            <input type="tel" style={inputStyle} />
+            <input
+              name="tel"
+              type="tel"
+              style={inputStyle}
+              value={formData.tel}
+              onChange={handleChange}
+            />
           </div>
           <div style={formGroupStyle}>
             <label style={labelStyle}>お問い合わせ内容<span style={reqStyle}>*</span></label>
-            <textarea style={{ ...inputStyle, height: '200px' }} required></textarea>
+            <textarea
+              name="content"
+              style={{ ...inputStyle, height: '200px' }}
+              value={formData.content}
+              onChange={handleChange}
+              required
+            ></textarea>
           </div>
           <div style={{ textAlign: 'center', marginTop: '40px' }}>
-            <button type="submit" className="btn btn-primary" style={submitBtnStyle}>入力内容を確認する</button>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              style={submitBtnStyle}
+              disabled={status === 'loading'}
+            >
+              {status === 'loading' ? '送信中...' : 'この内容で送信する'}
+            </button>
           </div>
+          {status === 'error' && (
+            <p style={{ color: 'red', marginTop: '20px', textAlign: 'center' }}>
+              送信中にエラーが発生しました。時間を置いて再度お試しください。
+            </p>
+          )}
         </form>
       </div>
     </div>
