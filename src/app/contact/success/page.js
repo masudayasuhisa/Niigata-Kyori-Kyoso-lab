@@ -9,8 +9,11 @@ export default function SuccessPage() {
             <div style={cardStyle}>
                 <div style={iconWrapperStyle}>
                     <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={svgStyle}>
+                        {/* 右側の大きい葉（緑） */}
                         <path d="M12 22C12 22 12 17 12 12C12 7 15 4 19 4C19 4 20 8 16 12C12 16 12 22 12 22Z" fill="var(--primary)" />
-                        <path d="M12 22C12 22 12 18 12 14C12 10 9 7 5 7C5 7 4 11 8 15C12 19 12 22 12 22Z" fill="var(--primary)" opacity="0.7" />
+                        {/* 左側の小さい葉（黄緑） */}
+                        <path d="M12 22C12 22 12 18 12 14C12 10 9 7 5 7C5 7 4 11 8 15C12 19 12 22 12 22Z" fill="#8cc63f" />
+                        {/* 茎 */}
                         <path d="M12 22V12" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" />
                     </svg>
                 </div>
