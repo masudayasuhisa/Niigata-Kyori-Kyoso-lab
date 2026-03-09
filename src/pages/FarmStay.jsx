@@ -135,8 +135,28 @@ const FarmStay = () => {
     contact
   } = database.minpaku;
   const [openFaq, setOpenFaq] = useState(null);
+  const [isContactVisible, setIsContactVisible] = useState(false);
   const contactRef = useRef(null);
   useReveal();
+
+  // Scroll logic to hide side tab when contact section is in view
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsContactVisible(entry.isIntersecting);
+      },
+      {
+        threshold: 0.05, // Trigger when 5% of contact section is visible
+        rootMargin: '0px 0px -100px 0px' // Offset to trigger a bit earlier
+      }
+    );
+
+    if (contactRef.current) {
+      observer.observe(contactRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const getImage = (id) => {
     const map = {
@@ -625,7 +645,11 @@ const FarmStay = () => {
       </section>
 
       {/* ========== 固定 お問い合わせタブ ========== */}
-      <a href="#contact" className="fixed-contact-tab" style={fixedContactTabStyle}>
+      <a
+        href="#contact"
+        className={`fixed-contact-tab ${isContactVisible ? 'fixed-contact-tab-hidden' : ''}`}
+        style={fixedContactTabStyle}
+      >
         お問い合わせ
       </a>
     </div>

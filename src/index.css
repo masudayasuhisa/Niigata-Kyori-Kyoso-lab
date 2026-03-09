@@ -499,7 +499,14 @@ h3 {
 }
 
 .fixed-contact-tab {
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+.fixed-contact-tab-hidden {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateY(-50%) translateX(20px) !important;
 }
 
 .fixed-contact-tab:hover {
@@ -599,26 +606,27 @@ h3 {
   }
 
 
-  /* Re-implement fixed contact tab for mobile as a bottom bar */
+  /* Side contact tab on mobile (compact version) */
   .fixed-contact-tab {
     display: flex !important;
     position: fixed !important;
-    bottom: 0 !important;
-    top: auto !important;
+    top: 50% !important;
     right: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 60px !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: auto !important;
+    height: auto !important;
     background: var(--accent) !important;
     color: white !important;
     z-index: 2000 !important;
     align-items: center !important;
     justify-content: center !important;
-    writing-mode: horizontal-tb !important;
-    transform: none !important;
-    border-radius: 0 !important;
-    font-size: 1.1rem !important;
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15) !important;
+    writing-mode: vertical-rl !important;
+    transform: translateY(-50%) !important;
+    border-radius: 12px 0 0 12px !important;
+    font-size: 0.85rem !important;
+    padding: 15px 8px !important;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15) !important;
     letter-spacing: 0.1em !important;
   }
 
@@ -652,6 +660,7 @@ h3 {
   display: block;
   width: 0;
 }
+
 /* Footer Styles */
 .footer-grid {
   display: flex;
@@ -676,7 +685,7 @@ h3 {
 
 .footer-bottom {
   padding-top: 40px;
-  border-top: 1px solid rgba(255,255,255,0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
   text-align: center;
   font-size: 0.8rem;
   opacity: 0.4;
@@ -692,7 +701,7 @@ h3 {
     flex-direction: column;
     gap: 40px;
   }
-  
+
   .footer-main {
     min-width: 100%;
   }
