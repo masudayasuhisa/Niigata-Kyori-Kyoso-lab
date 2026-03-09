@@ -184,6 +184,15 @@ const FarmStay = () => {
     return map[id] || (case1Img.src || case1Img);
   };
 
+  const scrollToContact = (e) => {
+    e.preventDefault();
+    setIsContactVisible(true); // Trigger fade-out immediately
+    const contactElement = document.getElementById('contact');
+    if (contactElement) {
+      contactElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div style={lpWrapperStyle}>
 
@@ -221,7 +230,7 @@ const FarmStay = () => {
             <br className="mobile-only" />
             <span className="inline-block-span">宝物。</span>
           </p>
-          <a href="#contact" className="btn btn-primary hero-cta-button" style={{ backgroundColor: 'var(--accent)', color: 'white', border: 'none', padding: '18px 45px', fontSize: '1.1rem', fontWeight: 'bold', borderRadius: '50px', marginTop: '10px', display: 'inline-block', textDecoration: 'none', boxShadow: '0 8px 25px rgba(141, 186, 75, 0.4)', transition: 'transform 0.3s, background-color 0.3s, color 0.3s, box-shadow 0.3s' }}>受け入れについて相談する</a>
+          <a href="#contact" onClick={scrollToContact} className="btn btn-primary hero-cta-button" style={{ backgroundColor: 'var(--accent)', color: 'white', border: 'none', padding: '18px 45px', fontSize: '1.1rem', fontWeight: 'bold', borderRadius: '50px', marginTop: '10px', display: 'inline-block', textDecoration: 'none', boxShadow: '0 8px 25px rgba(141, 186, 75, 0.4)', transition: 'transform 0.3s, background-color 0.3s, color 0.3s, box-shadow 0.3s' }}>受け入れについて相談する</a>
         </div>
 
         <div style={scrollDownStyle} className="desktop-only">
@@ -647,6 +656,7 @@ const FarmStay = () => {
       {/* ========== 固定 お問い合わせタブ ========== */}
       <a
         href="#contact"
+        onClick={scrollToContact}
         className={`fixed-contact-tab ${isContactVisible ? 'fixed-contact-tab-hidden' : ''}`}
         style={fixedContactTabStyle}
       >
