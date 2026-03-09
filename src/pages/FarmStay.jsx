@@ -47,6 +47,7 @@ import hostMyokoImg from '../assets/minpaku/host_myoko_bw.png';
 import hostTokamachiImg from '../assets/minpaku/host_tokamachi_bw.png';
 
 import lastMessageBgImg from '../assets/minpaku/last_message_bg.jpg';
+import Contact from '../components/Contact';
 
 const caseImageMap = {
   'aga-1.jpg': aga1Img,
@@ -616,25 +617,8 @@ const FarmStay = () => {
             </div>
 
             {/* お問い合わせフォーム */}
-            <div style={{ marginTop: '40px', textAlign: 'left', backgroundColor: 'var(--bg-light)', padding: '45px', borderRadius: '30px', border: '1px solid rgba(141,186,75,0.08)' }} className="contact-info-mobile">
-              <h3 style={{ fontSize: '1.3rem', fontWeight: '800', color: 'var(--primary)', marginBottom: '30px', textAlign: 'center' }}>Webからのお問い合わせ</h3>
-              <form style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                <div>
-                  <label htmlFor="name" style={{ display: 'block', marginBottom: '8px', fontWeight: '700', fontSize: '0.9rem', color: 'var(--text-light)' }}>お名前 <span style={{ color: 'white', backgroundColor: '#e53935', fontSize: '0.65rem', padding: '2px 8px', borderRadius: '20px', marginLeft: '6px' }}>必須</span></label>
-                  <input type="text" id="name" style={{ width: '100%', padding: '12px 18px', borderRadius: '12px', border: '1px solid #E2E8F0', fontSize: '1rem', outline: 'none', boxSizing: 'border-box' }} placeholder="例：新潟 太郎" />
-                </div>
-                <div>
-                  <label htmlFor="email" style={{ display: 'block', marginBottom: '8px', fontWeight: '700', fontSize: '0.9rem', color: 'var(--text-light)' }}>メールアドレス <span style={{ color: 'white', backgroundColor: '#e53935', fontSize: '0.65rem', padding: '2px 8px', borderRadius: '20px', marginLeft: '6px' }}>必須</span></label>
-                  <input type="email" id="email" style={{ width: '100%', padding: '12px 18px', borderRadius: '12px', border: '1px solid #E2E8F0', fontSize: '1rem', outline: 'none', boxSizing: 'border-box' }} placeholder="例：info@example.com" />
-                </div>
-                <div>
-                  <label htmlFor="message" style={{ display: 'block', marginBottom: '8px', fontWeight: '700', fontSize: '0.9rem', color: 'var(--text-light)' }}>お問い合わせ内容 <span style={{ color: 'white', backgroundColor: '#e53935', fontSize: '0.65rem', padding: '2px 8px', borderRadius: '20px', marginLeft: '6px' }}>必須</span></label>
-                  <textarea id="message" rows="5" style={{ width: '100%', padding: '12px 18px', borderRadius: '12px', border: '1px solid #E2E8F0', fontSize: '1rem', resize: 'vertical', outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }} placeholder="ご質問やご相談内容をご記入ください"></textarea>
-                </div>
-                <div style={{ textAlign: 'center', marginTop: '15px' }}>
-                  <button type="button" style={{ backgroundColor: 'var(--secondary)', color: 'white', padding: '16px 45px', borderRadius: '50px', border: 'none', fontSize: '1rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 6px 20px rgba(58, 143, 183, 0.25)', transition: 'transform 0.3s, box-shadow 0.3s' }} onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 10px 25px rgba(58, 143, 183, 0.35)'; }} onMouseOut={(e) => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(58, 143, 183, 0.25)'; }}>メッセージを送る</button>
-                </div>
-              </form>
+            <div style={{ marginTop: '40px', textAlign: 'left' }} className="contact-info-mobile">
+              <Contact isEmbedded={true} />
             </div>
           </div>
         </div>
