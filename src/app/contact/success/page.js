@@ -7,7 +7,13 @@ export default function SuccessPage() {
     return (
         <div className="container" style={containerStyle}>
             <div style={cardStyle}>
-                <div style={iconStyle}>✉️</div>
+                <div style={iconWrapperStyle}>
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={svgStyle}>
+                        <path d="M12 22C12 22 12 17 12 12C12 7 15 4 19 4C19 4 20 8 16 12C12 16 12 22 12 22Z" fill="var(--primary)" />
+                        <path d="M12 22C12 22 12 18 12 14C12 10 9 7 5 7C5 7 4 11 8 15C12 19 12 22 12 22Z" fill="var(--primary)" opacity="0.7" />
+                        <path d="M12 22V12" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" />
+                    </svg>
+                </div>
                 <h1 style={titleStyle}>
                     <span style={{ display: 'inline-block' }}>送信が完了</span>
                     <span style={{ display: 'inline-block' }}>しました</span>
@@ -57,10 +63,33 @@ const cardStyle = {
     animation: 'fadeIn 0.8s ease-out'
 };
 
-const iconStyle = {
-    fontSize: '3.5rem',
-    marginBottom: '20px'
+const iconWrapperStyle = {
+    marginBottom: '30px',
+    display: 'flex',
+    justifyContent: 'center',
+    animation: 'float 3s ease-in-out infinite'
 };
+
+const svgStyle = {
+    filter: 'drop-shadow(0 4px 10px rgba(38, 122, 77, 0.2))'
+};
+
+// Add float animation to global styles via a trick or assuming global.css
+if (typeof document !== 'undefined') {
+    const styleId = 'success-animations';
+    if (!document.getElementById(styleId)) {
+        const style = document.createElement('style');
+        style.id = styleId;
+        style.innerHTML = `
+            @keyframes float {
+                0% { transform: translateY(0px); }
+                50% { transform: translateY(-10px); }
+                100% { transform: translateY(0px); }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+}
 
 const titleStyle = {
     fontSize: '1.75rem',
