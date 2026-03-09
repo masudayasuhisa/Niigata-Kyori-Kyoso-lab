@@ -10,8 +10,8 @@ const Footer = ({ setPage }) => {
     <footer style={footerStyle}>
       <div className="container">
         <div className="footer-grid">
+          <div className="footer-main">
 
-          <div style={footerMainStyle}>
             <h2 style={{ fontSize: '1.6rem', fontWeight: '900', marginBottom: '25px', color: 'white' }}>にいがた<span style={{ color: 'var(--accent)' }}>郷里</span>共創ラボ</h2>
             <p style={{ opacity: 0.7, fontSize: '0.95rem', lineHeight: '1.8', maxWidth: '350px' }}>
               新潟の教育価値と地域の未来を共に創る。<br />
@@ -47,8 +47,8 @@ const Footer = ({ setPage }) => {
             </div>
           </div>
         </div>
-        <div style={footerBottomStyle}>
-          <p>© 2026 にいがた郷里共創ラボ / Niigata Kyori Kyoso Lab.</p>
+        <div className="footer-bottom">
+          <p>© 2026 にいがた郷里共創ラボ <span className="footer-copy-en">Niigata Kyori Kyoso Lab.</span></p>
         </div>
       </div>
     </footer>
@@ -71,11 +71,8 @@ const footerGridStyle = {
   marginBottom: '80px',
 };
 
-const footerMainStyle = { flex: '1.5', minWidth: '300px' };
-// footerLinksWrapperStyle moved to index.css for responsiveness
-const linkGroupStyle = { minWidth: '150px' };
+// Footer styles moved to index.css for better responsiveness
 const groupTitleStyle = { fontSize: '1.2rem', marginBottom: '30px', fontWeight: '900', letterSpacing: '1px' };
 const linkListStyle = { display: 'flex', flexDirection: 'column', gap: '15px', color: 'rgba(255,255,255,0.6)', fontSize: '0.95rem', listStyle: 'none', padding: 0, margin: 0 };
-const footerBottomStyle = { paddingTop: '40px', borderTop: '1px solid rgba(255,255,255,0.05)', textAlign: 'center', fontSize: '0.8rem', opacity: 0.4, letterSpacing: '1px' };
 
 export default Footer;
