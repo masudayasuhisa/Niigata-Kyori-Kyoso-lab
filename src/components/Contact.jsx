@@ -199,8 +199,8 @@ const Contact = ({ isEmbedded = false }) => {
             <button type="submit" className="btn btn-primary" style={{ ...submitBtnStyle, width: '100%', maxWidth: '300px' }}>入力内容を確認する</button>
           </div>
 
-          <div style={{ marginTop: '20px', fontSize: '0.7rem', color: '#ccc', textAlign: 'center' }}>
-            This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" style={{ color: '#ccc' }}>Privacy Policy</a> and <a href="https://policies.google.com/terms" style={{ color: '#ccc' }}>Terms of Service</a> apply.
+          <div style={{ marginTop: '20px', fontSize: '0.7rem', color: '#999', textAlign: 'center' }}>
+            This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" style={{ color: '#999' }}>Privacy Policy</a> and <a href="https://policies.google.com/terms" style={{ color: '#999' }}>Terms of Service</a> apply.
           </div>
         </form>
       </div>
@@ -231,7 +231,7 @@ const btnContainerStyle = { display: 'flex', gap: '15px', justifyContent: 'cente
 const confirmListStyle = { backgroundColor: '#f9f9f9', padding: '20px', borderRadius: '12px', border: '1px solid #f0f0f0' };
 const embeddedHeaderStyle = { fontSize: '1.2rem', fontWeight: '900', color: 'var(--primary)', marginBottom: '25px', textAlign: 'center' };
 
-// Add global styles for animation if not present
+// Add global styles for animation and reCAPTCHA hiding
 if (typeof document !== 'undefined') {
   const styleTag = document.getElementById('contact-animations');
   if (!styleTag) {
@@ -241,6 +241,9 @@ if (typeof document !== 'undefined') {
       @keyframes fadeIn {
         from { opacity: 0; transform: translateY(10px); }
         to { opacity: 1; transform: translateY(0); }
+      }
+      .grecaptcha-badge { 
+        visibility: hidden !important; 
       }
     `;
     document.head.appendChild(style);

@@ -510,7 +510,7 @@ h3 {
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;
-  transform: translateY(-50%) translateX(20px) !important;
+  transform: translateY(-50%) translateX(20px);
 }
 
 .fixed-contact-tab:hover {
@@ -524,6 +524,40 @@ h3 {
   background-color: #E6EE9C !important;
   color: var(--primary) !important;
   box-shadow: 0 10px 25px rgba(230, 238, 156, 0.4) !important;
+}
+
+.back-to-top {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  width: 50px;
+  height: 50px;
+  background-color: var(--primary);
+  color: white;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.back-to-top-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background-color: var(--accent);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(141, 186, 75, 0.4);
 }
 
 @keyframes scrollLine {
@@ -610,28 +644,34 @@ h3 {
   }
 
 
-  /* Side contact tab on mobile (compact version) */
+  /* Bottom contact bar on mobile (reverting to previous version) */
   .fixed-contact-tab {
     display: flex !important;
     position: fixed !important;
-    top: 50% !important;
+    top: auto !important;
     right: 0 !important;
-    bottom: auto !important;
-    left: auto !important;
-    width: auto !important;
-    height: auto !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 60px !important;
     background: var(--accent) !important;
     color: white !important;
     z-index: 2000 !important;
     align-items: center !important;
     justify-content: center !important;
-    writing-mode: vertical-rl !important;
-    transform: translateY(-50%) !important;
-    border-radius: 12px 0 0 12px !important;
-    font-size: 0.85rem !important;
-    padding: 15px 8px !important;
-    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15) !important;
-    letter-spacing: 0.1em !important;
+    writing-mode: horizontal-tb !important;
+    transform: none !important;
+    border-radius: 0 !important;
+    font-size: 1.1rem !important;
+    padding: 0 !important;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15) !important;
+    letter-spacing: 0.2em !important;
+  }
+
+  .fixed-contact-tab-hidden {
+    transform: translateY(100%) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
   }
 
   /* Padding for footer/content so it's not hidden behind the bar */
@@ -642,6 +682,14 @@ h3 {
   /* Hide background vertical text on mobile to avoid overlap */
   .section-title-bg::before {
     display: none !important;
+  }
+
+  /* Position back-to-top above the mobile contact bar */
+  .back-to-top {
+    bottom: 80px !important;
+    right: 20px !important;
+    width: 45px !important;
+    height: 45px !important;
   }
 }
 

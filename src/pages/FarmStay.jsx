@@ -136,18 +136,25 @@ const FarmStay = () => {
   } = database.minpaku;
   const [openFaq, setOpenFaq] = useState(null);
   const [isContactVisible, setIsContactVisible] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
   const contactRef = useRef(null);
   useReveal();
 
-  // Scroll logic to hide side tab when contact section is in view
+  // Scroll logic for Back-to-Top and Contact visibility
   React.useEffect(() => {
+    const handleScroll = () => {
+      if (typeof window !== 'undefined') {
+        setShowScrollTop(window.scrollY > 400);
+      }
+    };
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsContactVisible(entry.isIntersecting);
       },
       {
-        threshold: 0.05, // Trigger when 5% of contact section is visible
-        rootMargin: '0px 0px -100px 0px' // Offset to trigger a bit earlier
+        threshold: 0.05,
+        rootMargin: '0px 0px -100px 0px'
       }
     );
 
@@ -155,8 +162,23 @@ const FarmStay = () => {
       observer.observe(contactRef.current);
     }
 
-    return () => observer.disconnect();
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', handleScroll);
+    }
+
+    return () => {
+      observer.disconnect();
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('scroll', handleScroll);
+      }
+    };
   }, []);
+
+  const scrollToTop = () => {
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   const getImage = (id) => {
     const map = {
@@ -652,6 +674,17 @@ const FarmStay = () => {
           </div>
         </div>
       </section>
+
+      {/* ========== Back to Top Button ========== */}
+      <button
+        onClick={scrollToTop}
+        className={`back-to-top ${showScrollTop ? 'back-to-top-visible' : ''}`}
+        aria-label="ページトップへ戻る"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+      </button>
 
       {/* ========== 固定 お問い合わせタブ ========== */}
       <a
