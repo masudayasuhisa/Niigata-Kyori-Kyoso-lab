@@ -118,6 +118,22 @@ const IconUser = ({ size = 24, color = "currentColor" }) => (
 
 
 const FarmStay = () => {
+  /*
+   ### Verification Results
+- **Appearance:** Fades in smoothly after scrolling 400px down.
+- **Smooth Scroll:** Successfully returns to the top of the page with a smooth animation.
+- **No Overlap:** Verified appropriate spacing from the mobile contact bar.
+
+## Deployment Status
+
+All UI and UX improvements have been committed to the local repository.
+
+- **Commit Message:** `feat: optimize reCAPTCHA UI, revert mobile contact bar, and add back-to-top button`
+- **Current Branch:** `main`
+
+> [!NOTE]
+> Due to a network restriction, the `git push` command was unable to reach GitHub. Please run `git push origin main` in your terminal to trigger the Vercel deployment and see the changes live at [niigata-exp.jp](https://niigata-exp.jp).
+  */
   const {
     intro,
     whatIs,
@@ -690,7 +706,7 @@ const FarmStay = () => {
       <a
         href="#contact"
         onClick={scrollToContact}
-        className={`fixed-contact-tab ${isContactVisible ? 'fixed-contact-tab-hidden' : ''}`}
+        className={`fixed-contact-tab ${isContactVisible || !showScrollTop ? 'fixed-contact-tab-hidden' : ''}`}
         style={fixedContactTabStyle}
       >
         お問い合わせ
